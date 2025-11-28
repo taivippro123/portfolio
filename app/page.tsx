@@ -190,7 +190,7 @@ export default function Home() {
                 <p className="text-gray-400 leading-relaxed">{HERO.intro}</p>
               </div>
               <section id="about" className="scroll-mt-28">
-                <h2 className="text-3xl font-bold text-white mb-8">About</h2>
+                <h2 className="text-3xl font-bold text-green-400 mb-8">About</h2>
                 <div className="space-y-6 text-gray-300 leading-relaxed">
                   <p>
                     I'm a Front-End Developer passionate about building clean, accessible, and visually polished user interfaces.
@@ -229,7 +229,7 @@ export default function Home() {
               </div>
 
               <section id="experience" className="scroll-mt-28">
-                <h2 className="text-3xl font-bold text-white mb-8">Experience</h2>
+                <h2 className="text-3xl font-bold text-green-400 mb-8">Experience</h2>
                 <div className="space-y-8">
                   {[
                     {
@@ -254,16 +254,16 @@ export default function Home() {
                       href={job.url}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="block border-l-2 border-purple-500/50 pl-6 hover:border-green-500 transition-colors group"
+                      className="block border-l-2 border-green-500/50 pl-6 hover:border-green-500 transition-colors group"
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-white group-hover:text-green-400 transition-colors">
+                          <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
                             {job.role}
                           </h3>
-                          <p className="text-purple-400 font-mono text-sm">{job.company}</p>
+                          <p className="text-green-400 font-mono text-sm">{job.company}</p>
                         </div>
-                        <span className="text-gray-500 text-sm font-mono whitespace-nowrap ml-4">{job.period}</span>
+                        <span className="text-white text-sm font-mono whitespace-nowrap ml-4">{job.period}</span>
                       </div>
                       <p className="text-gray-400 leading-relaxed">{job.description}</p>
                     </a>
@@ -272,7 +272,7 @@ export default function Home() {
               </section>
 
               <section id="projects" className="scroll-mt-28">
-                <h2 className="text-3xl font-bold text-white mb-8">Featured Projects</h2>
+                <h2 className="text-3xl font-bold text-green-400 mb-8">Featured Projects</h2>
                 <div className="space-y-16">
                   {[
                     {
@@ -309,7 +309,7 @@ export default function Home() {
                         href={project.url}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="flex gap-4 items-start hover:opacity-75 transition-opacity"
+                        className="flex gap-4 items-start rounded-lg"
                       >
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-green-400 transition-colors flex items-center gap-2">
@@ -338,7 +338,7 @@ export default function Home() {
           </div>
           <section id="tools" className="scroll-mt-28 pb-20 w-full lg:col-span-2 px-2 sm:px-6 lg:px-10">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-6">Tools & Platforms</h2>
+              <h2 className="text-3xl font-bold text-green-400 mb-6">Tools & Platforms</h2>
               <p className="text-gray-400 leading-relaxed max-w-3xl">
                 A handful of technologies I lean on to ship reliable, fast, and immersive product experiences.
               </p>
