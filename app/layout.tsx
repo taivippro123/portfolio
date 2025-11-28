@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     description:
       "Portfolio of Phan Võ Thành Tài – Frontend Developer.",
   },
+  verification: {
+    google: "hoHgA07dcmyaqi9JNzSvLlmMoLfxBKu74VofKe-CxEY",
+  },
 };
 
 export default function RootLayout({
