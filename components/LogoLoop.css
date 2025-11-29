@@ -103,6 +103,7 @@
   text-decoration: none;
   border-radius: 4px;
   transition: opacity 0.2s ease;
+  color: inherit;
 }
 
 .logoloop__link:hover {
@@ -114,6 +115,27 @@
   outline-offset: 2px;
 }
 
+.logoloop__link svg {
+  color: currentColor;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+}
+
+.logoloop__link * {
+  color: inherit;
+}
+
+/* Ensure React icons are visible in dark theme */
+.logoloop__node svg {
+  color: rgba(255, 255, 255, 0.8);
+  fill: currentColor;
+}
+
+.logoloop__node:hover svg {
+  color: rgba(255, 255, 255, 1);
+}
+
 .logoloop--fade::before,
 .logoloop--fade::after {
   content: '';
@@ -123,6 +145,14 @@
   width: clamp(24px, 8%, 120px);
   pointer-events: none;
   z-index: 10;
+}
+
+/* Hide fadeout on mobile */
+@media (max-width: 1023px) {
+  .logoloop--fade::before,
+  .logoloop--fade::after {
+    display: none;
+  }
 }
 
 .logoloop--fade::before {

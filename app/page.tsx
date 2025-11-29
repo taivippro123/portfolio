@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { Github, Linkedin, ExternalLink, Mail } from "lucide-react"
 import LogoLoop from "@/components/LogoLoop"
+import GradientText from "@/components/GradientText"
+import TextType from "@/components/TextType"
 import {
   SiVercel,
   SiRender,
@@ -115,14 +117,36 @@ export default function Home() {
           <div className="hidden lg:flex p-12 flex-col justify-between sticky top-0 h-screen">
             <div>
               <div className="mb-12">
-                <h1 className="text-5xl font-bold text-white mb-2 tracking-tight">
-                  {HERO.firstName}{" "}
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-emerald-400 to-lime">
-                    {HERO.lastName}
-                  </span>
-                </h1>
+                <div className="mb-2">
+                  <h1 className="text-5xl font-bold text-white tracking-tight leading-tight">
+                    {HERO.firstName}
+                  </h1>
+                  <div className="-ml-4">
+                    <GradientText
+                      className="text-5xl font-bold block"
+                      colors={["#9333ea", "#a855f7", "#22c55e", "#16a34a", "#10b981"]}
+                      animationSpeed={4}
+                    >
+                      {HERO.lastName}
+                    </GradientText>
+                  </div>
+                </div>
                 <p className="text-xl text-gray-300 font-light">{HERO.title}</p>
-                <p className="text-sm text-gray-400 mt-4 leading-relaxed">{HERO.intro}</p>
+                <div className="text-sm text-gray-400 mt-4 leading-relaxed min-h-[3rem]">
+                  <TextType
+                    text={[
+                      "I enjoy turning ideas into smooth, accessible UI that look great.",
+                      "I enjoy delivering a seamless user experience.",
+                    ]}
+                    typingSpeed={50}
+                    pauseDuration={2000}
+                    loop={true}
+                    showCursor={true}
+                    className="text-gray-400"
+                    variableSpeed={undefined}
+                    onSentenceComplete={undefined}
+                  />
+                </div>
               </div>
 
               <nav className="space-y-2">
@@ -179,15 +203,37 @@ export default function Home() {
             <main className="py-24 lg:py-28 px-2 sm:px-6 lg:px-12 space-y-32 max-w-3xl mx-auto">
               <div className="lg:hidden space-y-6 mb-6">
                 <div>
-                  <h1 className="text-5xl font-bold text-white mb-2 tracking-tight">
-                    {HERO.firstName}{" "}
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-emerald-400 to-lime">
-                      {HERO.lastName}
-                    </span>
-                  </h1>
+                  <div className="mb-2">
+                    <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+                      {HERO.firstName}
+                    </h1>
+                    <div className="-ml-4">
+                      <GradientText
+                        className="text-4xl sm:text-5xl font-bold block"
+                        colors={["#9333ea", "#a855f7", "#22c55e", "#16a34a", "#10b981"]}
+                        animationSpeed={3}
+                      >
+                        {HERO.lastName}
+                      </GradientText>
+                    </div>
+                  </div>
                   <p className="text-lg text-gray-300 font-light">{HERO.title}</p>
                 </div>
-                <p className="text-gray-400 leading-relaxed">{HERO.intro}</p>
+                <div className="text-gray-400 leading-relaxed min-h-[3rem]">
+                  <TextType
+                    text={[
+                      "I enjoy turning ideas into smooth, accessible UI that look great",
+                      "I enjoy delivering a seamless user experience.",
+                    ]}
+                    typingSpeed={50}
+                    pauseDuration={2000}
+                    loop={true}
+                    showCursor={true}
+                    className="text-gray-400"
+                    variableSpeed={undefined}
+                    onSentenceComplete={undefined}
+                  />
+                </div>
               </div>
               <section id="about" className="scroll-mt-28">
                 <h2 className="text-3xl font-bold text-green-400 mb-8">About</h2>

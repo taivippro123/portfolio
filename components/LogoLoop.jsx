@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
+import { LinkPreview } from './ui/link-preview';
 
 const ANIMATION_CONFIG = { SMOOTH_TAU: 0.25, MIN_COPIES: 2, COPY_HEADROOM: 2 };
 
@@ -256,15 +257,18 @@ export const LogoLoop = memo(
         );
         const itemAriaLabel = isNodeItem ? (item.ariaLabel ?? item.title) : (item.alt ?? item.title);
         const itemContent = item.href ? (
-          <a
+          <LinkPreview
+            url={item.href}
             className="logoloop__link"
-            href={item.href}
-            aria-label={itemAriaLabel || 'logo link'}
+            width={300}
+            height={200}
             target="_blank"
             rel="noreferrer noopener"
           >
-            {content}
-          </a>
+            <span aria-label={itemAriaLabel || 'logo link'}>
+              {content}
+            </span>
+          </LinkPreview>
         ) : (
           content
         );
