@@ -199,7 +199,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div>
+          <div className="lg:col-span-1">
             <main className="py-24 lg:py-28 px-2 sm:px-6 lg:px-12 space-y-32 max-w-3xl mx-auto">
               <div className="lg:hidden space-y-6 mb-6">
                 <div>
@@ -380,31 +380,29 @@ export default function Home() {
                 </div>
               </section>
 
+              <section id="tools" className="scroll-mt-28 mt-32 pb-20">
+                <h2 className="text-3xl font-bold text-green-400 mb-6">Tools & Platforms</h2>
+                <p className="text-gray-400 leading-relaxed mb-10">
+                  A handful of technologies I lean on to ship reliable, fast, and immersive product experiences.
+                </p>
+                <div className="w-full overflow-hidden">
+                  <LogoLoop
+                    logos={loopLogos}
+                    speed={110}
+                    direction="left"
+                    logoHeight={56}
+                    gap={48}
+                    hoverSpeed={0}
+                    fadeOut
+                    fadeOutColor="#020617"
+                    scaleOnHover
+                    ariaLabel="Brittany's core tools"
+                    width="100%"
+                  />
+                </div>
+              </section>
             </main>
           </div>
-          <section id="tools" className="scroll-mt-28 pb-20 w-full lg:col-span-2 px-2 sm:px-6 lg:px-10">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-green-400 mb-6">Tools & Platforms</h2>
-              <p className="text-gray-400 leading-relaxed max-w-3xl">
-                A handful of technologies I lean on to ship reliable, fast, and immersive product experiences.
-              </p>
-            </div>
-            <div className="mt-10 w-full overflow-hidden">
-              <LogoLoop
-                logos={loopLogos}
-                speed={110}
-                direction="left"
-                logoHeight={56}
-                gap={48}
-                hoverSpeed={0}
-                fadeOut
-                fadeOutColor="#020617"
-                scaleOnHover
-                ariaLabel="Brittany's core tools"
-                width="100%"
-              />
-            </div>
-          </section>
         </div>
       </div>
     </div>
