@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "Portfolio of Phan Võ Thành Tài – Frontend Developer.",
   },
   verification: {
-    google: "hoHgA07dcmyaqi9JNzSvLlmMoLfxBKu74VofKe-CxEY",
+    google: "TJehJxsUZ8E7eJdM4mOEy99V8g7HZk-0iqQlhiWWgYo",
   },
 };
 
