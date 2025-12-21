@@ -155,7 +155,7 @@ export function AllContentView({
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Chỉnh sửa folder</DialogTitle>
+            <DialogTitle className="text-black">Chỉnh sửa folder</DialogTitle>
             <DialogDescription>Nhập tên mới cho folder</DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -172,8 +172,8 @@ export function AllContentView({
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditOpen(false)} className="border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-black hover:border-gray-400">Hủy</Button>
-            <Button onClick={handleEdit} className="bg-black text-white hover:bg-gray-800 font-medium">Lưu</Button>
+            <Button variant="outline" onClick={() => setIsEditOpen(false)} className="border-gray-300 text-white hover:bg-gray-100 hover:text-black hover:border-gray-400">Hủy</Button>
+            <Button onClick={handleEdit} className="bg-black text-white hover:bg-white hover:text-black font-medium">Lưu</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
