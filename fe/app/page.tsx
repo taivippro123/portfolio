@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Github, Linkedin, ExternalLink, Mail } from "lucide-react"
+import { Github, Linkedin, ExternalLink, Mail, FileText, ArrowRight } from "lucide-react"
 import LogoLoop from "@/components/LogoLoop"
 import GradientText from "@/components/GradientText"
 import TextType from "@/components/TextType"
@@ -55,15 +55,15 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "tools"]
+      const sections = ["about", "experience", "projects", "tools", "cv"]
       let currentSection = "about"
 
       const scrollBottom = window.innerHeight + window.scrollY
       const docHeight = document.documentElement.scrollHeight
 
-      // If we're at (or very near) the bottom of the page, always highlight the last section (tools)
+      // If we're at (or very near) the bottom of the page, always highlight the last section (cv)
       if (scrollBottom >= docHeight - 4) {
-        setActiveSection("tools")
+        setActiveSection("cv")
         return
       }
 
@@ -75,11 +75,25 @@ export default function Home() {
         if (!element) continue
 
         const rect = element.getBoundingClientRect()
-        const distance = Math.abs(rect.top - 160)
-
-        if (distance < closestDistance) {
-          closestDistance = distance
-          closestSection = sectionId
+        const viewportTop = 160
+        const viewportBottom = window.innerHeight
+        
+        // Check if section is visible in viewport or just above it
+        // For CV section, be more lenient since it's at the bottom
+        const isCV = sectionId === "cv"
+        const topThreshold = isCV ? viewportBottom - 100 : viewportTop - 200
+        
+        if (rect.top <= viewportBottom && rect.bottom >= topThreshold) {
+          // For sections in viewport, calculate distance from top
+          // For CV, prioritize if it's near the bottom of viewport
+          const distance = isCV 
+            ? Math.abs(viewportBottom - rect.bottom)
+            : Math.abs(rect.top - viewportTop)
+          
+          if (distance < closestDistance) {
+            closestDistance = distance
+            closestSection = sectionId
+          }
         }
       }
 
@@ -99,6 +113,11 @@ export default function Home() {
     if (!element) return
     const offset = element.getBoundingClientRect().top + window.scrollY - 80
     window.scrollTo({ top: offset, behavior: "smooth" })
+    
+    // Ensure the section stays active after scroll completes
+    setTimeout(() => {
+      setActiveSection(sectionId)
+    }, 500)
   }
 
   return (
@@ -155,6 +174,7 @@ export default function Home() {
                   { label: "Experience", id: "experience" },
                   { label: "Projects", id: "projects" },
                   { label: "Tools", id: "tools" },
+                  { label: "CV", id: "cv" },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -401,8 +421,26 @@ export default function Home() {
                   />
                 </div>
               </section>
+              
+              {/* CV Section */}
+              <section id="cv" className="scroll-mt-28 mt-20 mb-12">
+                <div className="flex justify-center">
+                  <a 
+                    href="/cv" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/20 to-purple-500/20 backdrop-blur-sm border border-green-500/30 rounded-full text-white hover:border-green-500/60 hover:from-green-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 hover:scale-105"
+                  >
+                    <FileText size={20} className="text-green-400 group-hover:text-green-300 transition-colors" />
+                    <span className="font-medium text-sm sm:text-base">View my CV</span>
+                    <ArrowRight size={18} className="text-green-400 group-hover:text-green-300 group-hover:translate-x-1 transition-all" />
+                  </a>
+                </div>
+              </section>
             </main>
+            
           </div>
+          
         </div>
       </div>
     </div>

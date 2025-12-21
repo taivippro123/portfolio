@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FileManagerSidebar } from "@/components/file-manager-sidebar"
+import { AllContentView } from "@/components/all-content-view"
+import { CVManagementView } from "@/components/cv-management-view"
+import { AnalyticsView } from "@/components/analytics-view"
+import { FolderContentView } from "@/components/folder-content-view"
+import { NoteEditorView } from "@/components/note-editor-view"
 import {
   SidebarProvider,
   SidebarInset,
@@ -117,12 +122,12 @@ function AvatarMenu() {
                       strokeWidth="4"
                       fill="none"
                     />
-                    <path
+                <path
                       className="opacity-75"
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
+                />
+              </svg>
                   <span>Đang đăng xuất...</span>
                 </>
               ) : (
@@ -135,7 +140,7 @@ function AvatarMenu() {
           </div>
         </div>
       )}
-    </div>
+      </div>
   )
 }
 
@@ -197,7 +202,38 @@ function SwipeableContent({ children }: { children: React.ReactNode }) {
   )
 }
 
-function FileManagerContent() {
+function FileManagerContent({ 
+  activeView, 
+  selectedFolderId,
+  selectedNoteId,
+  onFolderClick,
+  onNoteClick,
+  onBack
+}: { 
+  activeView: string
+  selectedFolderId: string | null
+  selectedNoteId: string | null
+  onFolderClick: (folderId: string) => void
+  onNoteClick?: (noteId: string) => void
+  onBack?: () => void
+}) {
+  const renderContent = () => {
+    switch (activeView) {
+      case "note":
+        return selectedNoteId ? <NoteEditorView noteId={selectedNoteId} onBack={onBack} /> : null
+      case "all-content":
+        return <AllContentView onFolderClick={onFolderClick} />
+      case "cv":
+        return <CVManagementView />
+      case "analytics":
+        return <AnalyticsView />
+      case "folder-content":
+        return <FolderContentView folderId={selectedFolderId} onNoteClick={onNoteClick} />
+      default:
+        return <AllContentView onFolderClick={onFolderClick} />
+    }
+  }
+
   return (
     <SwipeableContent>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-300 px-2 sm:px-4 bg-white">
@@ -222,93 +258,72 @@ function FileManagerContent() {
           </div>
         </header>
 
-        <div className="p-3 sm:p-6 bg-white">
-          <div className="mb-4 sm:mb-6 flex items-center gap-2 sm:gap-4 overflow-x-auto pb-2">
-          <Button variant="outline" className="gap-2 bg-black text-white border-gray-800 hover:bg-gray-100 hover:border-gray-700 text-sm whitespace-nowrap shrink-0">
-              <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">Create</span>
-            </Button>
-            <Button variant="outline" className="gap-2 bg-black text-white border-gray-800 hover:bg-gray-100 hover:border-gray-700 text-sm whitespace-nowrap shrink-0">
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path
-                  d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="hidden sm:inline">Upload</span>
-            </Button>
-            <Button variant="outline" className="gap-2 bg-black text-white border-gray-800 hover:bg-gray-100 hover:border-gray-700 text-sm whitespace-nowrap shrink-0">
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path
-                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="hidden sm:inline">Create folder</span>
-            </Button>
-            <Button variant="outline" className="gap-2 bg-black text-white border-gray-800 hover:bg-gray-100 hover:border-gray-700 text-sm whitespace-nowrap shrink-0">
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path
-                  d="M12 18.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM12 14a2 2 0 100-4 2 2 0 000 4z"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="hidden sm:inline">Record</span>
-            </Button>
-          </div>
-
-          <div className="mb-6">
-            <Tabs defaultValue="recent">
-              <TabsList className="bg-gray-100 border border-gray-300">
-                <TabsTrigger 
-                  value="recent" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:border-gray-300 text-gray-700"
-                >
-                  Recent
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="starred"
-                  className="data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:border-gray-300 text-gray-700"
-                >
-                  Starred
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="shared"
-                  className="data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:border-gray-300 text-gray-700"
-                >
-                  Shared
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <FileCard title="Q4 Sales Deck" metadata="Shared folder • 8 presentations" thumbnail="/placeholder.svg" />
-            <FileCard title="Product Videos" metadata="Shared folder • 5 videos" thumbnail="/placeholder.svg" />
-            <FileCard title="ROI Calculator" metadata="Shared file • 1 Excel" thumbnail="/placeholder.svg" />
-            <FileCard title="Marketing Materials" metadata="Shared folder • 12 files" thumbnail="/placeholder.svg" />
-            <FileCard title="Team Photos" metadata="Shared folder • 24 images" thumbnail="/placeholder.svg" />
-            <FileCard title="Annual Report" metadata="Shared file • 1 PDF" thumbnail="/placeholder.svg" />
-            <FileCard title="Training Videos" metadata="Shared folder • 6 videos" thumbnail="/placeholder.svg" />
-            <FileCard title="Client Proposals" metadata="Shared folder • 15 documents" thumbnail="/placeholder.svg" />
-          </div>
+        <div className="flex-1 overflow-auto">
+          {renderContent()}
         </div>
     </SwipeableContent>
   )
 }
 
 export default function FileManager() {
+  const [activeView, setActiveView] = useState("all-content")
+  const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null)
+  const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null)
+
+  // Check if there's a noteId in sessionStorage (from /note/[id] redirect)
+  useEffect(() => {
+    const openNoteId = sessionStorage.getItem('openNoteId')
+    if (openNoteId) {
+      sessionStorage.removeItem('openNoteId')
+      setSelectedNoteId(openNoteId)
+      setActiveView("note")
+    }
+  }, [])
+
+  const handleViewChange = (view: string) => {
+    setActiveView(view)
+    if (view !== "folder-content" && view !== "note") {
+      setSelectedFolderId(null)
+      setSelectedNoteId(null)
+    }
+  }
+
+  const handleFolderClick = (folderId: string) => {
+    setSelectedFolderId(folderId)
+    setActiveView("folder-content")
+  }
+
+  const handleNoteClick = (noteId: string) => {
+    setSelectedNoteId(noteId)
+    setActiveView("note")
+  }
+
+  const handleBack = () => {
+    if (selectedFolderId) {
+      setActiveView("folder-content")
+    } else {
+      setActiveView("all-content")
+    }
+    setSelectedNoteId(null)
+  }
+
   return (
     <SidebarProvider>
-      <FileManagerSidebar />
-      <SidebarInset className="bg-white">
-        <FileManagerContent />
+      <FileManagerSidebar 
+        activeView={activeView}
+        onViewChange={handleViewChange}
+        onFolderClick={handleFolderClick}
+        onNoteClick={handleNoteClick}
+      />
+      <SidebarInset className="bg-white flex flex-col">
+        <FileManagerContent 
+          activeView={activeView}
+          selectedFolderId={selectedFolderId}
+          selectedNoteId={selectedNoteId}
+          onFolderClick={handleFolderClick}
+          onNoteClick={handleNoteClick}
+          onBack={handleBack}
+        />
       </SidebarInset>
     </SidebarProvider>
   )
