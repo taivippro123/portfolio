@@ -1,4 +1,4 @@
-import User from "../models/UserModel.js";
+import User from "../models/userModel.js";
 import {comparePassword, generateToken, hashPassword, verifyToken} from "../middleware/auth.js";
 export const createUser = async (req, res) => {
   try {
