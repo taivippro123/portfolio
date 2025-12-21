@@ -76,7 +76,10 @@ app.use("/api/share", ShareRoute); // Public route, không cần auth
 
 connectDB().then(() => {
   console.log("Database connected successfully");
-  app.listen(PORT, () => {
+  app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
   });
+}).catch((error) => {
+  console.error("Failed to connect to database:", error);
+  process.exit(1);
 });
