@@ -85,8 +85,8 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on 0.0.0.0:${PORT}`);
   
   // Connect to database after server starts
-  connectDB().then(() => {
-    console.log("Database connected successfully");
+connectDB().then(() => {
+  console.log("Database connected successfully");
   }).catch((error) => {
     console.error("Failed to connect to database:", error);
     // Don't exit - server can still run for health checks
