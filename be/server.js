@@ -74,12 +74,21 @@ app.use("/api/analytics", AnalyticsRoute);
 app.use("/api/upload", UploadRoute);
 app.use("/api/share", ShareRoute); // Public route, không cần auth
 
-connectDB().then(() => {
-  console.log("Database connected successfully");
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server is running on port ${PORT}`);
+// Health check endpoint (before DB connection)
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Server is running" });
+});
+
+// Start server first, then connect DB
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server listening on 0.0.0.0:${PORT}`);
+  
+  // Connect to database after server starts
+  connectDB().then(() => {
+    console.log("Database connected successfully");
+  }).catch((error) => {
+    console.error("Failed to connect to database:", error);
+    // Don't exit - server can still run for health checks
   });
-}).catch((error) => {
-  console.error("Failed to connect to database:", error);
-  process.exit(1);
 });
