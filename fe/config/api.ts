@@ -1,1 +1,1 @@
-export const API_URL = "https://taivippro123-portfolio.fly.dev/"
+export const API_URL = "https://taivippro123-portfolio.fly.dev"
