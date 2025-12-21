@@ -311,6 +311,8 @@ export default function FileManager() {
     <SidebarProvider>
       <FileManagerSidebar 
         activeView={activeView}
+        selectedFolderId={selectedFolderId}
+        selectedNoteId={selectedNoteId}
         onViewChange={handleViewChange}
         onFolderClick={handleFolderClick}
         onNoteClick={handleNoteClick}

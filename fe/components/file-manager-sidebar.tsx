@@ -39,12 +39,16 @@ interface Note {
 
 export function FileManagerSidebar({ 
   activeView,
+  selectedFolderId,
+  selectedNoteId,
   onViewChange,
   onFolderClick,
   onNoteClick,
   ...props 
 }: React.ComponentProps<typeof Sidebar> & {
   activeView?: string
+  selectedFolderId?: string | null
+  selectedNoteId?: string | null
   onViewChange?: (view: string) => void
   onFolderClick?: (folderId: string) => void
   onNoteClick?: (noteId: string) => void
@@ -197,7 +201,10 @@ export function FileManagerSidebar({
                     onOpenChange={() => toggleFolder(folder._id)}
                   >
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton className="text-gray-700 hover:bg-gray-100 hover:text-black">
+                      <SidebarMenuButton 
+                        className="text-gray-700 hover:bg-gray-100 hover:text-black data-[active=true]:bg-gray-200 data-[active=true]:text-black"
+                        isActive={selectedFolderId === folder._id}
+                      >
                         <ChevronRight className="transition-transform" />
                         <Folder className="h-4 w-4" />
                         <span>{folder.name}</span>
@@ -209,7 +216,8 @@ export function FileManagerSidebar({
                           <SidebarMenuItem key={note._id}>
                             <SidebarMenuButton 
                               asChild 
-                              className="text-gray-600 hover:bg-gray-100 hover:text-black"
+                              className="text-gray-600 hover:bg-gray-100 hover:text-black data-[active=true]:bg-gray-200 data-[active=true]:text-black"
+                              isActive={selectedNoteId === note._id}
                               onClick={() => {
                                 if (onNoteClick) {
                                   onNoteClick(note._id)

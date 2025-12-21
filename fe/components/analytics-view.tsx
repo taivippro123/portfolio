@@ -145,8 +145,8 @@ export function AnalyticsView() {
         return (
           <div className="mt-6 flex items-center justify-between">
             <div className="text-sm text-gray-600">
-              Trang {pagination.currentPage} / {pagination.totalPages} 
-              ({pagination.totalRecords} records)
+              Trang {pagination.currentPage}/{pagination.totalPages} { }
+              ({pagination.totalRecords} bản ghi)
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -154,7 +154,7 @@ export function AnalyticsView() {
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={!pagination.hasPrevPage}
-                className="border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-black hover:border-gray-400 disabled:opacity-50"
+                className="border-gray-300 text-white hover:bg-gray-100 hover:text-black hover:border-gray-400 disabled:opacity-50"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Trước
@@ -179,8 +179,8 @@ export function AnalyticsView() {
                       onClick={() => setCurrentPage(pageNum)}
                       className={
                         pagination.currentPage === pageNum
-                          ? "bg-black text-white hover:bg-gray-800"
-                          : "border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-black hover:border-gray-400"
+                          ? "bg-black text-white hover:bg-grey-200"
+                          : "border-gray-300 text-white hover:bg-gray-100 hover:text-black hover:border-gray-400"
                       }
                     >
                       {pageNum}
@@ -193,7 +193,7 @@ export function AnalyticsView() {
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.min(pagination.totalPages, prev + 1))}
                 disabled={!pagination.hasNextPage}
-                className="border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-black hover:border-gray-400 disabled:opacity-50"
+                className="border-gray-300 text-white hover:bg-gray-100 hover:text-black hover:border-gray-400 disabled:opacity-50"
               >
                 Sau
                 <ChevronRight className="h-4 w-4" />
