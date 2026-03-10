@@ -204,7 +204,7 @@ export default function Home() {
                   <Github size={20} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/t%C3%A0i-th%C3%A0nh-649a44388/"
+                  href="https://www.linkedin.com/in/taivippro123/"
                   className="text-gray-400 hover:text-green-500 transition-colors p-2 hover:bg-green-500/10 rounded border border-transparent hover:border-green-500/30"
                 >
                   <Linkedin size={20} />
@@ -259,10 +259,7 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-green-400 mb-8">About</h2>
                 <div className="space-y-6 text-gray-300 leading-relaxed">
                   <p>
-                    I'm a Front-End Developer passionate about building clean, accessible, and visually polished user interfaces.
-                    I love working where design meets technology — turning ideas into smooth, responsive experiences that feel great on every device.
-                    I focus on writing maintainable code, optimizing performance, and crafting products that balance functionality with refined user experience.
-                    I'm always learning, experimenting, and pushing myself to create interfaces that are not only beautiful, but meaningful and user-centered.
+                    I'm a Front-End Developer focused on building clean, responsive, and user-friendly interfaces. I enjoy turning ideas into smooth digital experiences while writing maintainable code and optimizing performance.
                   </p>
                   <p>
                     Currently, I'm a Front-End Developer at{" "}
