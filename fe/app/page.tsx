@@ -299,6 +299,14 @@ export default function Home() {
                 <div className="space-y-8">
                   {[
                     {
+                      role: "Intern Mobile Developer",
+                      company: "POPIPLUS SMART SOLUTIONS COMPANY LIMITED",
+                      period: "Mar 2026 — Jun 2026",
+                      url: "https://lozido.com/",
+                      description:
+                        "I was an Intern Mobile Developer for Lozido project. I was responsible for collaborating with the team to build modules & features for mobile applications.",
+                    },
+                    {
                       role: "Intern Front-End Developer",
                       company: "FPT Software Academy",
                       period: "Jan 2025 — May 2025",
