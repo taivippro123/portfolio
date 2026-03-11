@@ -44,6 +44,7 @@ const HERO = {
 export default function Home() {
   const [activeSection, setActiveSection] = useState("about")
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [cvAvailable, setCvAvailable] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -55,15 +56,15 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "tools", "cv"]
+      const sections = ["about", "experience", "projects", "tools", ...(cvAvailable ? ["cv"] : [])]
       let currentSection = "about"
 
       const scrollBottom = window.innerHeight + window.scrollY
       const docHeight = document.documentElement.scrollHeight
 
-      // If we're at (or very near) the bottom of the page, always highlight the last section (cv)
+      // If we're at (or very near) the bottom of the page, always highlight the last section
       if (scrollBottom >= docHeight - 4) {
-        setActiveSection("cv")
+        setActiveSection(cvAvailable ? "cv" : "tools")
         return
       }
 
@@ -105,6 +106,21 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll)
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [cvAvailable])
+
+  useEffect(() => {
+    const checkCvHealth = async () => {
+      try {
+        const res = await fetch("https://taivippro123-portfolio.fly.dev/health")
+        if (res.ok) {
+          setCvAvailable(true)
+        }
+      } catch {
+        // silently ignore errors – CV stays hidden
+      }
+    }
+
+    checkCvHealth()
   }, [])
 
   const scrollToSection = (sectionId: string) => {
@@ -174,7 +190,7 @@ export default function Home() {
                   { label: "Experience", id: "experience" },
                   { label: "Projects", id: "projects" },
                   { label: "Tools", id: "tools" },
-                  { label: "CV", id: "cv" },
+                  ...(cvAvailable ? [{ label: "CV", id: "cv" }] : []),
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -239,7 +255,7 @@ export default function Home() {
                   </div>
                   <p className="text-lg text-gray-300 font-light">{HERO.title}</p>
                 </div>
-                <div className="text-gray-400 leading-relaxed min-h-[3rem]">
+                <div className="text-gray-400 leading-relaxed h-[3.5rem] flex items-center">
                   <TextType
                     text={[
                       "I enjoy turning ideas into smooth, accessible UI that look great",
@@ -327,15 +343,17 @@ export default function Home() {
                       rel="noreferrer noopener"
                       className="block border-l-2 border-green-500/50 pl-6 hover:border-green-500 transition-colors group"
                     >
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
-                            {job.role}
-                          </h3>
-                          <p className="text-green-400 font-mono text-sm">{job.company}</p>
-                        </div>
-                        <span className="text-white text-sm font-mono whitespace-nowrap ml-4">{job.period}</span>
+                      <div className="flex items-start justify-between mb-1">
+                        <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors mr-4">
+                          {job.role}
+                        </h3>
+                        <span className="text-white text-sm font-mono whitespace-nowrap">
+                          {job.period}
+                        </span>
                       </div>
+                      <p className="text-green-400 font-mono text-sm mb-2">
+                        {job.company}
+                      </p>
                       <p className="text-gray-400 leading-relaxed">{job.description}</p>
                     </a>
                   ))}
@@ -428,20 +446,22 @@ export default function Home() {
               </section>
               
               {/* CV Section */}
-              <section id="cv" className="scroll-mt-28 mt-20 mb-12">
-                <div className="flex justify-center">
-                  <a 
-                    href="/cv" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/20 to-purple-500/20 backdrop-blur-sm border border-green-500/30 rounded-full text-white hover:border-green-500/60 hover:from-green-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 hover:scale-105"
-                  >
-                    <FileText size={20} className="text-green-400 group-hover:text-green-300 transition-colors" />
-                    <span className="font-medium text-sm sm:text-base">View my CV</span>
-                    <ArrowRight size={18} className="text-green-400 group-hover:text-green-300 group-hover:translate-x-1 transition-all" />
-                  </a>
-                </div>
-              </section>
+              {cvAvailable && (
+                <section id="cv" className="scroll-mt-28 mt-20 mb-12">
+                  <div className="flex justify-center">
+                    <a 
+                      href="/cv" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/20 to-purple-500/20 backdrop-blur-sm border border-green-500/30 rounded-full text-white hover:border-green-500/60 hover:from-green-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 hover:scale-105"
+                    >
+                      <FileText size={20} className="text-green-400 group-hover:text-green-300 transition-colors" />
+                      <span className="font-medium text-sm sm:text-base">View my CV</span>
+                      <ArrowRight size={18} className="text-green-400 group-hover:text-green-300 group-hover:translate-x-1 transition-all" />
+                    </a>
+                  </div>
+                </section>
+              )}
             </main>
             
           </div>
