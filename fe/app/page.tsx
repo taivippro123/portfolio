@@ -111,7 +111,8 @@ export default function Home() {
   useEffect(() => {
     const checkCvHealth = async () => {
       try {
-        const res = await fetch("https://taivippro123-portfolio.fly.dev/health")
+        // Call same-origin API route to avoid browser CORS blocking
+        const res = await fetch("/api/health", { cache: "no-store" })
         if (res.ok) {
           setCvAvailable(true)
         }

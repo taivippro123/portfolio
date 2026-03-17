@@ -1,0 +1,275 @@
+/* [project]/components/LogoLoop.css [app-client] (css) */
+.logoloop {
+  --logoloop-gap: 32px;
+  --logoloop-logoHeight: 28px;
+  --logoloop-fadeColorAuto: #fff;
+  position: relative;
+}
+
+.logoloop--vertical {
+  height: 100%;
+  display: inline-block;
+}
+
+.logoloop--scale-hover {
+  padding-top: calc(var(--logoloop-logoHeight) * .1);
+  padding-bottom: calc(var(--logoloop-logoHeight) * .1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .logoloop {
+    --logoloop-fadeColorAuto: #0b0b0b;
+  }
+}
+
+.logoloop__track {
+  will-change: transform;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 0;
+  flex-wrap: nowrap;
+  width: max-content;
+  display: flex;
+  position: relative;
+}
+
+.logoloop--vertical .logoloop__track {
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+}
+
+.logoloop__list {
+  align-items: center;
+  gap: var(--logoloop-gap);
+  display: flex;
+}
+
+.logoloop__list:after {
+  content: "";
+  width: var(--logoloop-gap);
+  flex: none;
+  display: block;
+}
+
+.logoloop--vertical .logoloop__list {
+  gap: var(--logoloop-gap);
+  flex-direction: column;
+}
+
+.logoloop--vertical .logoloop__list:after {
+  width: 100%;
+  height: var(--logoloop-gap);
+}
+
+.logoloop__item {
+  font-size: var(--logoloop-logoHeight);
+  flex: none;
+  line-height: 1;
+}
+
+.logoloop__node {
+  align-items: center;
+  display: inline-flex;
+}
+
+.logoloop__item img {
+  height: var(--logoloop-logoHeight);
+  object-fit: contain;
+  width: auto;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+  display: block;
+}
+
+.logoloop--scale-hover .logoloop__item {
+  overflow: visible;
+}
+
+.logoloop--scale-hover .logoloop__item:hover img, .logoloop--scale-hover .logoloop__item:hover .logoloop__node {
+  transform-origin: center;
+  transform: scale(1.2);
+}
+
+.logoloop--scale-hover .logoloop__node {
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.logoloop__link {
+  color: inherit;
+  border-radius: 4px;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity .2s;
+  display: inline-flex;
+}
+
+.logoloop__link:hover {
+  opacity: .8;
+}
+
+.logoloop__link:focus-visible {
+  outline-offset: 2px;
+  outline: 2px solid;
+}
+
+.logoloop__link svg {
+  color: currentColor;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+}
+
+.logoloop__link * {
+  color: inherit;
+}
+
+.logoloop__node svg {
+  color: #fffc;
+  fill: currentColor;
+}
+
+.logoloop__node:hover svg {
+  color: #fff;
+}
+
+.logoloop--fade:before, .logoloop--fade:after {
+  content: "";
+  pointer-events: none;
+  z-index: 10;
+  width: clamp(24px, 8%, 120px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+@media (max-width: 1023px) {
+  .logoloop--fade:before, .logoloop--fade:after {
+    display: none;
+  }
+}
+
+.logoloop--fade:before {
+  background: linear-gradient(to right, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, #0000 100%);
+  left: 0;
+}
+
+.logoloop--fade:after {
+  background: linear-gradient(to left, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, #0000 100%);
+  right: 0;
+}
+
+.logoloop--vertical.logoloop--fade:before, .logoloop--vertical.logoloop--fade:after {
+  width: 100%;
+  height: clamp(24px, 8%, 120px);
+  left: 0;
+  right: 0;
+}
+
+.logoloop--vertical.logoloop--fade:before {
+  background: linear-gradient(to bottom, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, #0000 100%);
+  top: 0;
+  bottom: auto;
+}
+
+.logoloop--vertical.logoloop--fade:after {
+  background: linear-gradient(to top, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, #0000 100%);
+  top: auto;
+  bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoloop__track {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .logoloop__item img, .logoloop__node {
+    transition: none !important;
+  }
+}
+
+/* [project]/components/GradientText.css [app-client] (css) */
+.animated-gradient-text {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 1.25rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: fit-content;
+  margin: 0;
+  padding: .5rem 1rem;
+  font-weight: 500;
+  transition: box-shadow .5s ease-out;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-overlay {
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background-size: 300% 100%;
+  animation: linear infinite gradient;
+  position: absolute;
+  inset: 0;
+}
+
+.gradient-overlay:before {
+  content: "";
+  border-radius: inherit;
+  z-index: -1;
+  background-color: #060010;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+
+.text-content {
+  z-index: 2;
+  color: #0000;
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: linear infinite gradient;
+  display: inline-block;
+  position: relative;
+}
+
+/* [project]/components/TextType.css [app-client] (css) */
+.text-type {
+  white-space: pre-wrap;
+  display: inline-block;
+}
+
+.text-type__cursor {
+  opacity: 1;
+  margin-left: .25rem;
+  display: inline-block;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
+/*# sourceMappingURL=components_45b361e1._.css.map*/
