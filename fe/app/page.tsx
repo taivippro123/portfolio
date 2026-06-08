@@ -78,19 +78,19 @@ export default function Home() {
         const rect = element.getBoundingClientRect()
         const viewportTop = 160
         const viewportBottom = window.innerHeight
-        
+
         // Check if section is visible in viewport or just above it
         // For CV section, be more lenient since it's at the bottom
         const isCV = sectionId === "cv"
         const topThreshold = isCV ? viewportBottom - 100 : viewportTop - 200
-        
+
         if (rect.top <= viewportBottom && rect.bottom >= topThreshold) {
           // For sections in viewport, calculate distance from top
           // For CV, prioritize if it's near the bottom of viewport
-          const distance = isCV 
+          const distance = isCV
             ? Math.abs(viewportBottom - rect.bottom)
             : Math.abs(rect.top - viewportTop)
-          
+
           if (distance < closestDistance) {
             closestDistance = distance
             closestSection = sectionId
@@ -130,7 +130,7 @@ export default function Home() {
     if (!element) return
     const offset = element.getBoundingClientRect().top + window.scrollY - 80
     window.scrollTo({ top: offset, behavior: "smooth" })
-    
+
     // Ensure the section stays active after scroll completes
     setTimeout(() => {
       setActiveSection(sectionId)
@@ -171,8 +171,13 @@ export default function Home() {
                 <div className="text-sm text-gray-400 mt-4 leading-relaxed min-h-[3rem]">
                   <TextType
                     text={[
-                      "I enjoy turning ideas into smooth, accessible UI that look great.",
-                      "I enjoy delivering a seamless user experience.",
+                      "Frontend Developer",
+                      "React.js Developer",
+                      "TypeScript Developer",
+                      "Building Modern Web Apps",
+                      "Creating Responsive Interfaces",
+                      "Focused on UI/UX Excellence",
+                      "Clean Code, Better Experience",
                     ]}
                     typingSpeed={50}
                     pauseDuration={2000}
@@ -259,8 +264,13 @@ export default function Home() {
                 <div className="text-gray-400 leading-relaxed h-[3.5rem] flex items-center">
                   <TextType
                     text={[
-                      "I enjoy turning ideas into smooth, accessible UI that look great",
-                      "I enjoy delivering a seamless user experience.",
+                      "Frontend Developer",
+                      "React.js Developer",
+                      "TypeScript Developer",
+                      "Building Modern Web Apps",
+                      "Creating Responsive Interfaces",
+                      "Focused on UI/UX Excellence",
+                      "Clean Code, Better Experience",
                     ]}
                     typingSpeed={50}
                     pauseDuration={2000}
@@ -276,11 +286,11 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-green-400 mb-8">About</h2>
                 <div className="space-y-6 text-gray-300 leading-relaxed">
                   <p>
-                    I'm a Front-End Developer focused on building clean, responsive, and user-friendly interfaces. I enjoy turning ideas into smooth digital experiences while writing maintainable code and optimizing performance.
+                    Front-End Developer focused on building responsive, user-friendly, and high-performance web applications.
                   </p>
                   <p>
-                    Currently, I'm a Front-End Developer at{" "}
-                    <span className="text-green-500 font-semibold">FPT University</span>, majoring in Software Engineering. I'm in my 4th year of study, with a focus on software development.
+                    I studied Software Engineering at{" "}
+                    <span className="text-green-500 font-semibold">FPT University</span>. I'm a fresh graduate, with a focus on software development.
                   </p>
                 </div>
               </section>
@@ -313,12 +323,12 @@ export default function Home() {
                 <div className="space-y-8">
                   {[
                     {
-                      role: "Intern Mobile Developer",
+                      role: "Intern Front-End Developer",
                       company: "POPIPLUS SMART SOLUTIONS COMPANY LIMITED",
                       period: "Mar 2026 — Jun 2026",
                       url: "https://lozido.com/",
                       description:
-                        "I was an Intern Mobile Developer for Lozido project. I was responsible for collaborating with the team to build modules & features for mobile applications.",
+                        "Intern Front-End Developer at Lozido. I was responsible for collaborating with the team to build modules & features for web applications.",
                     },
                     {
                       role: "Intern Front-End Developer",
@@ -326,15 +336,15 @@ export default function Home() {
                       period: "Jan 2025 — May 2025",
                       url: "https://fsoft-academy.edu.vn/",
                       description:
-                        "I was an Intern Front-End Developer at FPT Software Academy. I was responsible for collaborating with the team to build and maintain the web applications.",
+                        "Intern Front-End Developer at FPT Software Academy. I was responsible for collaborating with the team to build and maintain the web applications.",
                     },
                     {
                       role: "Student",
                       company: "FPT University",
-                      period: "Sep 2022 — Apr 2026",
+                      period: "Sep 2022 — May 2026",
                       url: "https://fpt.edu.vn/don-vi/dai-hoc-fpt",
                       description:
-                        "Studying Software Engineering at FPT University. I'm currently in my 4th year of study, with a focus on software development.",
+                        "Studied Software Engineering at FPT University.",
                     },
                   ].map((job, idx) => (
                     <a
@@ -370,7 +380,14 @@ export default function Home() {
                       url: "https://payhook.codes",
                       description:
                         "Payhook is an open-source project that parses bank transaction emails and pushes normalized data via Webhook/WebSocket in real time",
-                      tags: ["Javascript", "Node.js", "React", "MongoDB"],
+                      tags: ["Javascript", "Node.js", "React", "MongoDB", "Google OAuth", "Google Pub/Sub"],
+                    },
+                    {
+                      title: "Bookfet",
+                      url: "https://bookfet.vercel.app/",
+                      description:
+                        "Mobile application allow customers to browse and book buffet event at home and company.",
+                      tags: ["React Native", "Expo", "FCM", "Tanstack Query"],
                     },
                     {
                       title: "ASA",
@@ -378,21 +395,7 @@ export default function Home() {
                       description:
                         "ASA is a POS project that helps small grocery store owners operate efficiently, manage inventory, and sell products with integrated automatic payments, AI suggestions for restocking, and business strategy recommendations.",
                       tags: ["React", "React Native", "Tailwind CSS", "TypeScript", "Next.js"],
-                    },
-                    {
-                      title: "POS WEBSITE",
-                      url: "https://frontend-theta-two-64.vercel.app/",
-                      description:
-                        "A POS inspired by a UI on v0.dev https://v0.app/templates/restaurant-pos-2bo1P6Xaoqg",
-                      tags: ["React", "Tailwind CSS", "Node.js", "Express", "MySQL"],
-                    },
-                    {
-                      title: "Discord Clone",
-                      url: "https://discord-tau-five.vercel.app/",
-                      description:
-                        "A real-time chat application inspired by Discord",
-                      tags: ["React", "Tailwind CSS", "Node.js", "Express", "MySQL"],
-                    },
+                    }
                   ].map((project, idx) => (
                     <div key={idx} className="group cursor-pointer">
                       <a
@@ -445,13 +448,13 @@ export default function Home() {
                   />
                 </div>
               </section>
-              
+
               {/* CV Section */}
               {cvAvailable && (
                 <section id="cv" className="scroll-mt-28 mt-20 mb-12">
                   <div className="flex justify-center">
-                    <a 
-                      href="/cv" 
+                    <a
+                      href="/cv"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500/20 to-purple-500/20 backdrop-blur-sm border border-green-500/30 rounded-full text-white hover:border-green-500/60 hover:from-green-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-green-500/10 hover:shadow-green-500/20 hover:scale-105"
@@ -464,9 +467,9 @@ export default function Home() {
                 </section>
               )}
             </main>
-            
+
           </div>
-          
+
         </div>
       </div>
     </div>
