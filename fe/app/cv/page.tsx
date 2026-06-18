@@ -12,7 +12,13 @@ export default function CVPage() {
     const fetchCV = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`${API_URL}/api/cv/public`)
+        const queryParams = new URLSearchParams(window.location.search)
+        const ref = queryParams.get("ref") || queryParams.get("utm_source") || ""
+        const url = ref
+          ? `${API_URL}/api/cv/public?ref=${encodeURIComponent(ref)}`
+          : `${API_URL}/api/cv/public`
+
+        const response = await fetch(url)
         if (!response.ok) {
           throw new Error("CV không tồn tại")
         }
