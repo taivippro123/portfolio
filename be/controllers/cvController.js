@@ -80,6 +80,7 @@ export const getCV = async (req, res) => {
       ipAddress: req.ip || req.headers["x-forwarded-for"]?.split(",")[0] || req.connection.remoteAddress || req.socket.remoteAddress || "unknown",
       userAgent: req.get("user-agent") || "unknown",
       referer: req.get("referer") || "direct",
+      ref: req.query.ref || req.query.utm_source || "",
     };
 
     // Gọi recordCVView async (không đợi kết quả để không block response)

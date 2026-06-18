@@ -172,6 +172,26 @@ export const analyticsApi = {
     if (!response.ok) throw new Error("Failed to fetch analytics")
     return response.json()
   },
+
+  getHome: async (page: number = 1, limit: number = 15) => {
+    const response = await fetch(`${API_URL}/api/analytics/home?page=${page}&limit=${limit}`, {
+      headers: getAuthHeaders(),
+    })
+    if (!response.ok) throw new Error("Failed to fetch analytics")
+    return response.json()
+  },
+
+  recordHome: async (referer: string, ref: string) => {
+    const response = await fetch(`${API_URL}/api/analytics/home`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ referer, ref }),
+    })
+    if (!response.ok) throw new Error("Failed to record home view")
+    return response.json()
+  },
 }
 
 // Share API (Public)

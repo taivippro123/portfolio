@@ -1,5 +1,5 @@
 import express from "express";
-import { getAnalytics } from "../controllers/analyticsController.js";
+import { getAnalytics, getHomeAnalytics, recordHomeView } from "../controllers/analyticsController.js";
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -91,5 +91,7 @@ const router = express.Router();
  */
 router.get("/", verifyToken, getAnalytics);
 router.get("/cv", verifyToken, getAnalytics);
+router.post("/home", recordHomeView);
+router.get("/home", verifyToken, getHomeAnalytics);
 
 export default router;

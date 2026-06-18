@@ -5,6 +5,7 @@ import { Github, Linkedin, ExternalLink, Mail, FileText, ArrowRight } from "luci
 import LogoLoop from "@/components/LogoLoop"
 import GradientText from "@/components/GradientText"
 import TextType from "@/components/TextType"
+import { analyticsApi } from "@/lib/api"
 import {
   SiVercel,
   SiRender,
@@ -122,6 +123,20 @@ export default function Home() {
     }
 
     checkCvHealth()
+  }, [])
+
+  useEffect(() => {
+    const recordView = async () => {
+      try {
+        const queryParams = new URLSearchParams(window.location.search)
+        const ref = queryParams.get("ref") || queryParams.get("utm_source") || ""
+        const referer = document.referrer || ""
+        await analyticsApi.recordHome(referer, ref)
+      } catch (error) {
+        console.error("Error recording home view:", error)
+      }
+    }
+    recordView()
   }, [])
 
   const scrollToSection = (sectionId: string) => {

@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const analyticsSchema = new mongoose.Schema(
   {
-    cvId: { type: mongoose.Schema.Types.ObjectId, ref: "CV", required: true },
+    cvId: { type: mongoose.Schema.Types.ObjectId, ref: "CV" },
+    resourceType: { type: String, enum: ["cv", "home"], default: "cv" },
     ipAddress: { type: String, required: true },
     country: { type: String },
     city: { type: String },
@@ -18,6 +19,7 @@ const analyticsSchema = new mongoose.Schema(
 
 // Index để query nhanh hơn
 analyticsSchema.index({ cvId: 1, createdAt: -1 });
+analyticsSchema.index({ resourceType: 1, createdAt: -1 });
 analyticsSchema.index({ ipAddress: 1 });
 
 const Analytics = mongoose.model("Analytics", analyticsSchema);
