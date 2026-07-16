@@ -29,7 +29,7 @@ app.set("trust proxy", true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: ["https://taivippro123.vercel.app", "http://localhost:3000", "https://bafc-161-118-235-226.ngrok-free.app"],
+  origin: ["https://taivippro123.vercel.app", "http://localhost:3000", "outspoken-katrice-unamplifiable.ngrok-free.dev"],
   credentials: true,
 }));
 
