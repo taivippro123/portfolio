@@ -30,6 +30,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: ["https://taivippro123.vercel.app", "http://localhost:3000", "https://outspoken-katrice-unamplifiable.ngrok-free.dev"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
   credentials: true,
 }));
 
