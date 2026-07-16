@@ -1,8 +1,9 @@
+import { API_URL } from "@/config/api"
 export const runtime = "nodejs"
 
 export async function GET() {
   try {
-    const upstream = await fetch("https://taivippro123-portfolio.fly.dev/health", {
+    const upstream = await fetch(`${API_URL}/health`, {
       cache: "no-store",
     })
 
