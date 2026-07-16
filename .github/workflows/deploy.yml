@@ -30,4 +30,4 @@ jobs:
             npm install --omit=dev
             
             # 4. Restart lại tiến trình PM2 để cập nhật code mới
-            pm2 restart backend
+            pm2 restart portfolio
