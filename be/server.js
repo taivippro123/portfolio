@@ -29,7 +29,7 @@ app.set("trust proxy", true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: ["https://taivippro123.vercel.app", "http://localhost:3000"],
+  origin: ["https://taivippro123.vercel.app", "http://localhost:3000", "https://bafc-161-118-235-226.ngrok-free.app"],
   credentials: true,
 }));
 
@@ -85,7 +85,7 @@ app.use("/api/share", ShareRoute); // Public route, không cần auth
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`✅ Server is running on port ${PORT}`);
   console.log(`✅ Server listening on 0.0.0.0:${PORT}`);
-  
+
   // Connect to database AFTER server starts (async, non-blocking)
   connectDB().then(() => {
     console.log("✅ Database connected successfully");
