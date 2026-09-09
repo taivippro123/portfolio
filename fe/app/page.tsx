@@ -17,6 +17,7 @@ import {
   SiNextdotjs,
   SiTailwindcss,
   SiGithub,
+  SiNestjs,
 } from "react-icons/si"
 
 const techLogos = [
@@ -26,6 +27,7 @@ const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
   { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <SiNestjs />, title: "NestJS", href: "https://nestjs.com" },
   { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/docs/Web/JavaScript" },
   { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
   { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
@@ -338,12 +340,12 @@ export default function Home() {
                 <div className="space-y-8">
                   {[
                     {
-                      role: "Intern Front-End Developer",
+                      role: "Software Developer",
                       company: "POPIPLUS SMART SOLUTIONS COMPANY LIMITED",
-                      period: "Mar 2026 — Jun 2026",
+                      period: "Mar 2026 — Sep 2026",
                       url: "https://lozido.com/",
                       description:
-                        "Intern Front-End Developer at Lozido. I was responsible for collaborating with the team to build modules & features for web applications.",
+                        "Software Developer at Lozido. I was responsible for collaborating with the team to build modules & features for web applications.",
                     },
                     {
                       role: "Intern Front-End Developer",
