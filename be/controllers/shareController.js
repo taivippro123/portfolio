@@ -20,7 +20,7 @@ export const getSharedContent = async (req, res) => {
         { folderId: { $in: sharedFolderIds } },
       ],
     })
-      .select("title content folderId createdAt updatedAt")
+      .select("title content folderId isShared createdAt updatedAt")
       .sort({ updatedAt: -1 });
 
     // Lọc notes: chỉ giữ notes hợp lệ
@@ -59,4 +59,3 @@ export const getSharedContent = async (req, res) => {
     console.log("Get Shared Content Error:", error);
   }
 };
-

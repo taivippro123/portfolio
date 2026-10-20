@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Folder, FileText, Eye, Calendar } from "lucide-react"
+import { useParams } from "next/navigation"
 import { shareApi } from "@/lib/api"
 import {
   Dialog,
@@ -34,6 +35,8 @@ interface SharedContent {
 }
 
 export default function SharePage() {
+  const params = useParams<{ id?: string }>()
+  const noteId = params.id
   const [content, setContent] = useState<SharedContent | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedNote, setSelectedNote] = useState<Note | null>(null)
@@ -58,6 +61,41 @@ export default function SharePage() {
   const handleNoteClick = (note: Note) => {
     setSelectedNote(note)
     setIsDialogOpen(true)
+    window.history.pushState(null, "", `/share/${note._id}`)
+  }
+
+  useEffect(() => {
+    if (!content) return
+
+    if (!noteId) {
+      setSelectedNote(null)
+      setIsDialogOpen(false)
+      return
+    }
+
+    const note = content.notes.find((sharedNote) => sharedNote._id === noteId)
+    setSelectedNote(note || null)
+    setIsDialogOpen(Boolean(note))
+  }, [content, noteId])
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const currentNoteId = window.location.pathname.split("/").pop()
+      const note = content?.notes.find((sharedNote) => sharedNote._id === currentNoteId)
+      setSelectedNote(note || null)
+      setIsDialogOpen(Boolean(note))
+    }
+
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [content])
+
+  const handleDialogOpenChange = (open: boolean) => {
+    setIsDialogOpen(open)
+
+    if (!open && window.location.pathname !== "/share") {
+      window.history.replaceState(null, "", "/share")
+    }
   }
 
   if (loading) {
@@ -116,11 +154,11 @@ export default function SharePage() {
                       {folderNotes.map((note) => (
                         <div
                           key={note._id}
-                          className="group relative bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer"
+                          className="group relative flex h-full flex-col bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer"
                           onClick={() => handleNoteClick(note)}
                         >
                           {/* Card Header */}
-                          <div className="p-5 pb-3">
+                          <div className="flex-1 p-5 pb-3">
                             <div className="flex items-start gap-3 mb-3">
                               <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-gray-200 transition-colors">
                                 <FileText className="h-5 w-5 text-gray-700" />
@@ -189,11 +227,11 @@ export default function SharePage() {
                     {content.notesByFolder["no-folder"].map((note) => (
                       <div
                         key={note._id}
-                        className="group relative bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer"
+                      className="group relative flex h-full flex-col bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer"
                         onClick={() => handleNoteClick(note)}
                       >
                         {/* Card Header */}
-                        <div className="p-5 pb-3">
+                      <div className="flex-1 p-5 pb-3">
                           <div className="flex items-start gap-3 mb-3">
                             <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-gray-200 transition-colors">
                               <FileText className="h-5 w-5 text-gray-700" />
@@ -252,7 +290,7 @@ export default function SharePage() {
       </div>
 
       {/* Full Content Dialog */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <Dialog open={isDialogOpen} onOpenChange={handleDialogOpenChange}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto border-gray-300 bg-white [&>button]:text-black [&>button]:hover:text-black [&>button]:hover:bg-gray-200 [&>button]:opacity-100">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-black mb-2">
